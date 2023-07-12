@@ -20,8 +20,9 @@ then clone that repository in your prefered working directory.
 git clone https://github.com/stefaniscion/homeserver
 ```
 Done that, we can go on with the installation.
-### Install all packages
-To install all packages, just run the following command:
+### Do setup
+To setup all base system, just run the following command:
 ```bash
-sudo dnf install $(cat packages.txt)
+sh setup.sh
 ```
+Do now a reboot of the server to be sure that all packages are installed correctly.
