@@ -54,3 +54,6 @@ Now we need to create the mount point for the MergerFS pool. Edit the file /etc/
 ```
  /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
 ```
+## TODO
+- Add snapraid configuration
+- Create docker-compose files for the containers
