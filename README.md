@@ -13,11 +13,12 @@ To manage the backup of the data i decided to use **SnapRAID**.
 
 ## Installation
 I'm using Rocky Linux (9) as base OS. Then the commandands and the packages are for this OS. Feel free to use any other OS bya adapting the commands. 
-### Install the Base OS
+### Install the base OS
 First install your base os on the server.
 I'm using Rocky Linux.
-#### Why Rocky Linux?
-I love how YUM and DNF manages the packages. Sadly i think that CentOS is not anymore a good choice for a server, so i decided to use Rocky Linux.
+#### Why i choosed Rocky Linux?
+I love how ```yum``` and ```dnf``` manages the packages. Sadly i think that the main alternative based on rpm, CentOS is not anymore a good choice for a server, so i decided to use Rocky Linux.
+
 You can find more info about Rocky Linux [here](https://rockylinux.org/).
 ### SSH into the server
 After the installation, you need to ssh into the server so you can do the installation process remotely.
@@ -42,8 +43,8 @@ Now we need to mount the storage and set up MergerFS.
 First of all we need to create the mount points for the storage.
 Edit the file /etc/fstab and add the following lines for each physical drive:
 ```
-UUID={diskuuid} /mnt/data1 exfat defaults 0 0
-UUID={diskuuid} /mnt/data2 exfat defaults 0 0
+UUID={diskuuid} /mnt/data1 exfat defaults,uid=1000,gid=1000 0 0
+UUID={diskuuid} /mnt/data2 exfat defaults,uid=1000,gid=1000 0 0
 ```
 Where {diskuuid} is the UUID of the disk. You can find it with the command:
 ```bash
@@ -51,5 +52,5 @@ sudo blkid
 ```
 Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
 ```
-/mnt/data1:/mnt/data2 /mnt/data-merged fuse.mergerfs uid=1000,gid=1000 0 0
+ /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
 ```
