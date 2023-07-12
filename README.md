@@ -31,11 +31,25 @@ then clone that repository in your prefered working directory.
 git clone https://github.com/stefaniscion/homeserver
 ```
 Done that, we can go on with the installation.
-### Do setup
+### Start setup script
 To setup all base system, just run the following command:
 ```bash
 sh setup.sh
 ```
 Do now a reboot of the server to be sure that all packages are installed correctly.
-
-
+### Mounting the storage and set up MergerFS
+Now we need to mount the storage and set up MergerFS.
+First of all we need to create the mount points for the storage.
+Edit the file /etc/fstab and add the following lines for each physical drive:
+```
+UUID={diskuuid} /mnt/data1 exfat defaults 0 0
+UUID={diskuuid} /mnt/data2 exfat defaults 0 0
+```
+Where {diskuuid} is the UUID of the disk. You can find it with the command:
+```bash
+sudo blkid
+```
+Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
+```
+/mnt/data1:/mnt/data2 /mnt/data-merged fuse.mergerfs uid=1000,gid=1000 0 0
+```
