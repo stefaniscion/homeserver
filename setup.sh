@@ -8,6 +8,9 @@ sudo dnf install cockpit -y
 sudo systemctl enable --now cockpit.socket
 sudo firewall-cmd --add-service=cockpit --permanent
 sudo firewall-cmd --reload
+#cockpit addons
+sudo dnf install cockpit-storaged cockpit-networkmanager cockpit-packagekit cockpit-podman cockpit-selinux cockpit-sosreport  -y
+
 
 # FILESYSTEM TOOLS
 # mergerfs
