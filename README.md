@@ -43,16 +43,34 @@ Now we need to mount the storage and set up MergerFS.
 First of all we need to create the mount points for the storage.
 Edit the file /etc/fstab and add the following lines for each physical drive:
 ```
-UUID={diskuuid} /mnt/data1 exfat defaults,uid=1000,gid=1000 0 0
-UUID={diskuuid} /mnt/data2 exfat defaults,uid=1000,gid=1000 0 0
+UUID={diskuuid} /mnt/data1 ext4 defaults 0 0
+UUID={diskuuid} /mnt/data2 ext4 defaults 0 0
+UUID={diskuuid} /mnt/parity1 ext4 defaults 0 0
 ```
 Where {diskuuid} is the UUID of the disk. You can find it with the command:
 ```bash
 sudo blkid
 ```
+Also check for permission, i sudgest to give the permission to the user that will run the containers, i will use the user with uid 1000 and gid 1000.
+```bash
+sudo chown -R 1000:1000 /mnt/data1
+sudo chown -R 1000:1000 /mnt/data2
+sudo chown -R 1000:1000 /mnt/parity1
+```
 Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
 ```
  /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
+```
+### Setup SnapRaid
+Now we need to setup SnapRaid.
+First of all we need to create the configuration file, that will be located in /etc/snapraid.conf.
+I made an example file for the case below.
+```
+parity /mnt/parity1/snapraid.parity
+data data1 /mnt/data1/
+data data2 /mnt/data2/
+content /mnt/data1/snapraid.content
+content /mnt/data2/snapraid.content
 ```
 ## TODO
 - Add snapraid configuration
