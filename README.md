@@ -1,7 +1,7 @@
 # My Homeserver
 This is my personal homeserver setup. I wanted some features and settings that i didn't find in other homeserver setups. So i decided to create my own. I'm sharing this with you so you can use it as a base for your own homeserver.
 ## Features
-I setup my homeserver with some specification.
+I setup my homeserver with some specification in mind.
 
 First i wanted to have a web interface to manage the server easly. So i decided to use **Cockpit**.
 
@@ -30,6 +30,7 @@ sudo dnf install git
 then clone that repository in your prefered working directory.
 ```bash 
 git clone https://github.com/stefaniscion/homeserver
+cd homeserver
 ```
 Done that, we can go on with the installation.
 ### Start setup script
@@ -43,9 +44,9 @@ Now we need to mount the storage and set up MergerFS.
 First of all we need to create the mount points for the storage.
 Edit the file /etc/fstab and add the following lines for each physical drive:
 ```
-UUID={diskuuid} /mnt/data1 ext4 defaults 0 0
-UUID={diskuuid} /mnt/data2 ext4 defaults 0 0
-UUID={diskuuid} /mnt/parity1 ext4 defaults 0 0
+UUID={diskuuid} /mnt/data1 ext4 defaults,nofail 0 0
+UUID={diskuuid} /mnt/data2 ext4 defaults,nofail 0 0
+UUID={diskuuid} /mnt/parity1 ext4 defaults,nofail 0 0
 ```
 Where {diskuuid} is the UUID of the disk. You can find it with the command:
 ```bash
@@ -59,7 +60,7 @@ sudo chown -R 1000:1000 /mnt/parity1
 ```
 Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
 ```
- /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
+/mnt/data1:/mnt/data2 /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
 ```
 ### Setup SnapRaid
 Now we need to setup SnapRaid.
@@ -73,5 +74,6 @@ content /mnt/data1/snapraid.content
 content /mnt/data2/snapraid.content
 ```
 ## TODO
-- Add snapraid configuration
+- Add duckdns configuration
+- Add snapraid cron configuration
 - Create docker-compose files for the containers
