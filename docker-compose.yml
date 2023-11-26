@@ -15,3 +15,21 @@ services:
     volumes:
       - ./config/duckdns/config:/config
     restart: unless-stopped
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Rome
+    volumes:
+      - ./config/nextcloud/config:/config
+      - ${MERGER_PATH}/data:/data
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped
+
+  #nextcloud:
+  #jellyfin:
+  #homeassistant:
