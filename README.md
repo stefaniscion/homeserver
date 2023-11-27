@@ -5,7 +5,7 @@ I setup my homeserver with some specification in mind.
 
 First i wanted to have a web interface to manage the server easly. So i decided to use **Cockpit**.
 
-I wanted to install the apps in containers so i can manage them easly and i can have a better control and a modularization of the system. So i decided to use **Podman** to do so.
+I wanted to install the apps in containers so i can manage them easly and i can have a better control and a modularization of the system. So i decided to use **Docker** to do so.
 
 I wanted to have a modularization of the storage so i can add more storage easly. So i decided to use **MergerFS** to do so.
 
@@ -72,6 +72,31 @@ data data1 /mnt/data1/
 data data2 /mnt/data2/
 content /mnt/data1/snapraid.content
 content /mnt/data2/snapraid.content
+```
+### Create .env file
+Now we need to create the .env file in the project directory, with the secret used by the Docker-compose, with the following data:
+```
+DUCKDNS_SUBDOMAINS=
+DUCKDNS_TOKEN=
+```
+### Start the stack
+Now we can start the stack with the command:
+```bash
+Docker-compose up -d
+```
+## Usage
+### Cockpit interface
+You can access the Cockpit interface at the address http://localhost:9090
+## Troubleshooting
+### Selinux
+If you have selinux enabled, you need to allow the access to the folders used by the containers.
+```bash
+sudo semanage fcontext -a -t container_file_t "/mnt/data1(/.*)?"
+sudo semanage fcontext -a -t container_file_t "/mnt/data2(/.*)?"
+sudo semanage fcontext -a -t container_file_t "/mnt/parity1(/.*)?"
+sudo restorecon -Rv /mnt/data1
+sudo restorecon -Rv /mnt/data2
+sudo restorecon -Rv /mnt/parity1
 ```
 ## TODO
 - Add duckdns configuration
