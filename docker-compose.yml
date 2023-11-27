@@ -24,12 +24,20 @@ services:
       - TZ=Europe/Rome
     volumes:
       - ./config/nextcloud/config:/config
-      - ${MERGER_PATH}/data:/data
+      - /mnt/merger/data:/data
     ports:
-      - 443:443
-      - 80:80
+      - 9001:443
+    depends_on:
+      - nextcloud-db
+    links:
+      - nextcloud-db
     restart: unless-stopped
-
+  nextcloud-db:
+    image: mariadb:latest
+    container_name: nextcloud-db
+    environment:
+      MARIADB_ROOT_PASSWORD: ${NEXTCLOUD_DB_ROOT_PASSWORD}
+    restart: unless-stopped
   #nextcloud:
   #jellyfin:
   #homeassistant:
