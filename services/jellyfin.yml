@@ -7,7 +7,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
-      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
+      - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL}
     volumes:
       - ../config/jellyfin/config:/config
       - /mnt/merger/data/__groupfolders/1:/data
