@@ -10,8 +10,9 @@ services:
       - PGID=1000
       - TZ=Europe/Rome
       - URL=${HOMESERVER_URL}
-      - SUBDOMAINS=www,ombi
-      - VALIDATION=http
+      - SUBDOMAINS=wildcard
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${DUCKDNS_TOKEN}
     volumes:
       - ../config/swag/config:/config
     ports:
