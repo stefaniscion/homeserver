@@ -13,5 +13,5 @@ services:
       - UPDATE_IP=ipv4
       - LOG_FILE=false
     volumes:
-      - ./config/duckdns/config:/config
+      - ../config/duckdns/config:/config
     restart: unless-stopped

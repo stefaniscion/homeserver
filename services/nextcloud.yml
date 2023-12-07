@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Europe/Rome
     volumes:
-      - ./config/nextcloud/config:/config
+      - ../config/nextcloud/config:/config
       - /mnt/merger/data:/data
     ports:
       - 9001:443
@@ -27,7 +27,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${NEXTCLOUD_DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=nextcloud #optional
     volumes:
-      - ./config/nextcloud-mariadb/config:/config
+      - ../config/nextcloud-mariadb/config:/config
     restart: unless-stopped
 
   #jellyfin:
