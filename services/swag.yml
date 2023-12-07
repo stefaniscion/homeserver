@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Rome
+      - URL=${HOMESERVER_URL}
+      - SUBDOMAINS=www,ombi
+      - VALIDATION=http
+    volumes:
+      - ../config/swag/config:/config
+    ports:
+      - 443:443
+      - 80:80
+    restart: unless-stopped

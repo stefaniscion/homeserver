@@ -8,7 +8,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
-      - SUBDOMAINS=${DUCKDNS_SUBDOMAINS}
+      - SUBDOMAINS=${HOMESERVER_URL}
       - TOKEN=${DUCKDNS_TOKEN}
       - UPDATE_IP=ipv4
       - LOG_FILE=false
