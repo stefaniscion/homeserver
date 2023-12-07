@@ -11,7 +11,7 @@ I wanted to have a modularization of the storage so i can add more storage easly
 
 To manage the backup of the data i decided to use **SnapRAID**.
 
-## Installation
+## Host configuration
 I'm using Rocky Linux (9) as base OS. Then the commandands and the packages are for this OS. Feel free to use any other OS bya adapting the commands. 
 ### Install the base OS
 First install your base os on the server.
@@ -73,17 +73,23 @@ data data2 /mnt/data2/
 content /mnt/data1/snapraid.content
 content /mnt/data2/snapraid.content
 ```
+## Docker configuration
 ### Create .env file
 Now we need to create the .env file in the project directory, with the secret used by the Docker-compose, with the following data:
 ```
 DUCKDNS_SUBDOMAINS=
 DUCKDNS_TOKEN=
+NEXTCLOUD_DB_ROOT_PASSWORD=
 ```
 ### Start the stack
 Now we can start the stack with the command:
 ```bash
 Docker-compose up -d
 ```
+### Duckdns
+Duckdns shouldn't need any specific configuration.
+### Nextcloud
+First you need to connect your Nextcloud instance to the database. To do so, you need to go to the address https://localhost:9001 and login to the MariaDB instance with the user and password you setted up in the .env file.
 ## Usage
 ### Cockpit interface
 You can access the Cockpit interface at the address http://localhost:9090
@@ -98,7 +104,24 @@ sudo restorecon -Rv /mnt/data1
 sudo restorecon -Rv /mnt/data2
 sudo restorecon -Rv /mnt/parity1
 ```
+### Nextcloud sync with filesystem
+I made the following tuning to the Nextcloud instance:
+in ```config/www/nextcloud/config.php``` i added the following line to enable the filesystem file edit check.:
+```
+   'filesystem_check_changes' => 1,
+```
+### Nextcloud file upload limits
+I added the following lines to the ```config/php/php-local.ini``` file, to increase the upload size limit:
+```
+php_value upload_max_filesize 16G
+php_value post_max_size 16G
+php_value max_input_time 3600
+php_value max_execution_time 3600
+```
+and for the same reason, for the chunk assembly timeout, i added the following line to the ```config/nginx/site-confs/default.conf``` file:
+```
+fastcgi_read_timeout 3600s;
+```
 ## TODO
-- Add duckdns configuration
 - Add snapraid cron configuration
-- Create docker-compose files for the containers
+- create missing services
