@@ -13,3 +13,9 @@ services:
     ports:
       - 9003:8123
     restart: unless-stopped
+    networks:
+      - homeserver
+networks:
+  homeserver:
+    name: homeserver
+    external: true

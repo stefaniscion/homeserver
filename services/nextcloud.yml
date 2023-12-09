@@ -36,3 +36,4 @@ services:
 networks:
   homeserver:
     name: homeserver
+    external: true
