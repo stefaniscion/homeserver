@@ -102,11 +102,12 @@ NEXTCLOUD_DB_ROOT_PASSWORD=
 ```
 This data will be used by the Docker-compose to setup the containers.
 
-### Start the stack
-Now we can start the stack with the command:
+### Start the stacks
+Now we can start the stacks with the command:
 ```bash
-Docker-compose up -d
+sh start.sh
 ```
+the script will launch the docker-compose commands to start the stacks.
 
 ### SWAG
 Now you need to create the needed confs for the other services, so go to the ```config/nginx/proxy-confs``` folder and create the needed confs. 
