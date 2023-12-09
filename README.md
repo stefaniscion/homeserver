@@ -1,14 +1,14 @@
 # My Homeserver
 This is my personal homeserver setup. I wanted some features and settings that i didn't find in other homeserver setups. So i decided to create my own. I'm sharing this with you so you can use it as a base for your own homeserver.
 
-## Structure
+## Stack Structure
 
-| Servizio  | Dns Url     | Porta     |
-|-----------|-------------|-----------|
-| SWAG      | www.*       | 80,443    |
-| Nextcloud | nextcloud.* | 9001      |
-| Jellyfin  | jellyfin.*  | 9002      |
-| ...       | ...         | 9003      |
+| Servizio      | Dns Url         | Porta     |
+|---------------|-----------------|-----------|
+| swag          | www.*           | 80,443    |
+| nextcloud     | nextcloud.*     | 9001      |
+| jellyfin      | jellyfin.*      | 9002      |
+| homeassistant | homeassistant.* | 9003      |
 
 ## Features
 I setup my homeserver with some specification in mind.
