@@ -15,4 +15,7 @@ services:
       - 8096:8096
     restart: unless-stopped
     networks:
-      - bridge
+      - homeserver
+networks:
+  homeserver:
+    name: homeserver

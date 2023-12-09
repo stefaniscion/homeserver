@@ -18,7 +18,7 @@ services:
       - nextcloud-mariadb
     restart: unless-stopped
     networks:
-      - bridge
+      - homeserver
   nextcloud-mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: nextcloud-mariadb
@@ -31,3 +31,6 @@ services:
     volumes:
       - ../config/nextcloud-mariadb/config:/config
     restart: unless-stopped
+networks:
+  homeserver:
+    name: homeserver

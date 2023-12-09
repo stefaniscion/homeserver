@@ -20,4 +20,7 @@ services:
       - 80:80
     restart: unless-stopped
     networks:
-      - bridge
+      - homeserver
+networks:
+  homeserver:
+    name: homeserver
