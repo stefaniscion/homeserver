@@ -10,7 +10,7 @@ services:
       - PGID=1000
       - TZ=Europe/Rome
       - URL=${HOMESERVER_URL}
-      - SUBDOMAINS=www,nextcloud,jellyfin
+      - SUBDOMAINS=www,nextcloud,jellyfin,homeassistant
       - VALIDATION=duckdns
       - DUCKDNSTOKEN=${DUCKDNS_TOKEN}
     volumes:
