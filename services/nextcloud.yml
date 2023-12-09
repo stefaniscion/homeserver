@@ -11,12 +11,14 @@ services:
       - ../config/nextcloud/config:/config
       - /mnt/merger/data:/data
     ports:
-      - 9001:443
+      - 443:443
     depends_on:
       - nextcloud-mariadb
     links:
       - nextcloud-mariadb
     restart: unless-stopped
+    networks:
+      - services_default
   nextcloud-mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: nextcloud-mariadb
