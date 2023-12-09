@@ -31,6 +31,8 @@ services:
     volumes:
       - ../config/nextcloud-mariadb/config:/config
     restart: unless-stopped
+    networks:
+      - homeserver
 networks:
   homeserver:
     name: homeserver
