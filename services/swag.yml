@@ -20,7 +20,4 @@ services:
       - 80:80
     restart: unless-stopped
     networks:
-      - homeserver
-networks:
-  homeserver:
-    name: homeserver
+      - lsio

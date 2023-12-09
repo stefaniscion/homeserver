@@ -15,7 +15,4 @@ services:
       - 9002:8096
     restart: unless-stopped
     networks:
-      - homeserver
-networks:
-  homeserver:
-    name: homeserver
+      - lsio

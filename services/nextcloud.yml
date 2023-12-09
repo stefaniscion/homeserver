@@ -18,7 +18,7 @@ services:
       - nextcloud-mariadb
     restart: unless-stopped
     networks:
-      - homeserver
+      - lsio
   nextcloud-mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: nextcloud-mariadb
@@ -32,7 +32,4 @@ services:
       - ../config/nextcloud-mariadb/config:/config
     restart: unless-stopped
     networks:
-      - homeserver
-networks:
-  homeserver:
-    name: homeserver
+      - lsio
