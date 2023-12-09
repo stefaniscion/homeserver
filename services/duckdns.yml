@@ -15,4 +15,7 @@ services:
       - ../config/duckdns/config:/config
     restart: unless-stopped
     networks:
-      - lsio
+      - homeserver
+networks:
+  homeserver:
+    name: homeserver
