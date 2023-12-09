@@ -11,7 +11,7 @@ services:
       - ../config/nextcloud/config:/config
       - /mnt/merger/data:/data
     ports:
-      - 443:443
+      - 9001:443
     depends_on:
       - nextcloud-mariadb
     links:

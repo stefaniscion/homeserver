@@ -12,7 +12,7 @@ services:
       - ../config/jellyfin/config:/config
       - /mnt/merger/data/__groupfolders/1:/data
     ports:
-      - 8096:8096
+      - 9002:8096
     restart: unless-stopped
     networks:
       - homeserver
