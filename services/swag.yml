@@ -20,4 +20,4 @@ services:
       - 80:80
     restart: unless-stopped
     networks:
-      - services_default
+      - bridge

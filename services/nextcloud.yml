@@ -18,7 +18,7 @@ services:
       - nextcloud-mariadb
     restart: unless-stopped
     networks:
-      - services_default
+      - bridge
   nextcloud-mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: nextcloud-mariadb
