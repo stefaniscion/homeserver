@@ -1,11 +1,21 @@
 # My Homeserver
 This is my personal homeserver setup. I wanted some features and settings that i didn't find in other homeserver setups. So i decided to create my own. I'm sharing this with you so you can use it as a base for your own homeserver.
+
+## Structure
+
+| Servizio  | Dns Url     | Porta     |
+|-----------|-------------|-----------|
+| SWAG      | www.*       | 80,443    |
+| Nextcloud | nextcloud.* | 9001      |
+| Jellyfin  | jellyfin.*  | 9002      |
+| ...       | ...         | 9003      |
+
 ## Features
 I setup my homeserver with some specification in mind.
 
-First i wanted to have a web interface to manage the server easly. So i decided to use **Cockpit**.
-
 I wanted to install the apps in containers so i can manage them easly and i can have a better control and a modularization of the system. So i decided to use **Docker** to do so.
+
+**Linuxserver.io** is a great source of containers, so i decided to use them as base for my containers. Here you can find their [Website](https://www.linuxserver.io/).
 
 I wanted to have a modularization of the storage so i can add more storage easly. So i decided to use **MergerFS** to do so.
 
@@ -13,15 +23,19 @@ To manage the backup of the data i decided to use **SnapRAID**.
 
 ## Host configuration
 I'm using Rocky Linux (9) as base OS. Then the commandands and the packages are for this OS. Feel free to use any other OS bya adapting the commands. 
+
 ### Install the base OS
 First install your base os on the server.
 I'm using Rocky Linux.
+
 #### Why i choosed Rocky Linux?
-I love how ```yum``` and ```dnf``` manages the packages. Sadly i think that the main alternative based on rpm, CentOS is not anymore a good choice for a server, so i decided to use Rocky Linux.
+I love how ```yum``` and ```dnf``` manages the packages. Sadly i think that the main server alternative based on rpm, CentOS, is not anymore a good choice for a server, so i decided to use Rocky Linux.
 
 You can find more info about Rocky Linux [here](https://rockylinux.org/).
+
 ### SSH into the server
 After the installation, you need to ssh into the server so you can do the installation process remotely.
+
 ### Installing Git
 First of all we need to install git to clone this repository.
 ```bash 
@@ -33,12 +47,14 @@ git clone https://github.com/stefaniscion/homeserver
 cd homeserver
 ```
 Done that, we can go on with the installation.
+
 ### Start setup script
 To setup all base system, just run the following command:
 ```bash
 sh setup.sh
 ```
 Do now a reboot of the server to be sure that all packages are installed correctly.
+
 ### Mounting the storage and set up MergerFS
 Now we need to mount the storage and set up MergerFS.
 First of all we need to create the mount points for the storage.
@@ -62,6 +78,7 @@ Now we need to create the mount point for the MergerFS pool. Edit the file /etc/
 ```
 /mnt/data1:/mnt/data2 /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
 ```
+
 ### Setup SnapRaid
 Now we need to setup SnapRaid.
 First of all we need to create the configuration file, that will be located in /etc/snapraid.conf.
@@ -73,26 +90,45 @@ data data2 /mnt/data2/
 content /mnt/data1/snapraid.content
 content /mnt/data2/snapraid.content
 ```
+
 ## Docker configuration
+
 ### Create .env file
 Now we need to create the .env file in the project directory, with the secret used by the Docker-compose, with the following data:
 ```
-DUCKDNS_SUBDOMAINS=
+HOMESERVER_URL=
 DUCKDNS_TOKEN=
 NEXTCLOUD_DB_ROOT_PASSWORD=
 ```
+This data will be used by the Docker-compose to setup the containers.
+
 ### Start the stack
 Now we can start the stack with the command:
 ```bash
 Docker-compose up -d
 ```
+
+### SWAG
+Now you need to create the needed confs for the other services, so go to the ```config/nginx/proxy-confs``` folder and create the needed confs. 
+
+You can find some examples like in the ```config/nginx/proxy-confs/nextcloud.subdomain.conf.sample``` file.
+
+Any of the following services need a subdomain, so you need to create a subdomain for each service you want to use.
+
+You also need to change the port to connect to the service. Refer to the docker-compose files to see the port used by the service.
+
 ### Duckdns
 Duckdns shouldn't need any specific configuration.
+
 ### Nextcloud
 First you need to connect your Nextcloud instance to the database. To do so, you need to go to the address https://localhost:9001 and login to the MariaDB instance with the user and password you setted up in the .env file.
+
+### Jellyfin
+Jellyfin shouldn't need any specific configuration.
+
 ## Usage
-### Cockpit interface
-You can access the Cockpit interface at the address http://localhost:9090
+You can now connect to all the services with the subdomain you created.
+
 ## Troubleshooting
 ### Selinux
 If you have selinux enabled, you need to allow the access to the folders used by the containers.
@@ -124,4 +160,3 @@ fastcgi_read_timeout 3600s;
 ```
 ## TODO
 - Add snapraid cron configuration
-- create missing services
