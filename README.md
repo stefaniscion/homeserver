@@ -3,12 +3,12 @@ This is my personal homeserver setup. I wanted some features and settings that i
 
 ## Stack Structure
 
-| Servizio      | Dns Url         | Porta     |
-|---------------|-----------------|-----------|
-| swag          | www.*           | 80,443    |
-| nextcloud     | nextcloud.*     | 9001      |
-| jellyfin      | jellyfin.*      | 9002      |
-| homeassistant | homeassistant.* | 9003      |
+| Service       | Dns Url         | External Port | Internal Port |
+|---------------|-----------------|---------------|---------------|
+| swag          | www.*           | 80,443        | 80,443        |
+| nextcloud     | nextcloud.*     | 9001          | 443           |
+| jellyfin      | jellyfin.*      | 9002          | 8096          |
+| homeassistant | homeassistant.* | 9003          | 8123          |
 
 ## Features
 I setup my homeserver with some specification in mind.
