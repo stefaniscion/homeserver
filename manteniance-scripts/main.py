@@ -11,10 +11,10 @@ logging.basicConfig(level=logging.INFO)
 
 # parse arguments
 parser = argparse.ArgumentParser(description='Run some maintenance operations.')
-parser.add_argument('--configbackup', action=argparse.BooleanOptionalAction)
-parser.add_argument('--cleanbackup', action=argparse.BooleanOptionalAction)
-parser.add_argument('--snapraidscrub', action=argparse.BooleanOptionalAction)
-parser.add_argument('--snapraidsync', action=argparse.BooleanOptionalAction)
+parser.add_argument('--configbackup', action=argparse.BooleanOptionalAction, default=True)
+parser.add_argument('--cleanbackup', action=argparse.BooleanOptionalAction, default=True)
+parser.add_argument('--snapraidscrub', action=argparse.BooleanOptionalAction, default=True)
+parser.add_argument('--snapraidsync', action=argparse.BooleanOptionalAction, default=True)
 args = parser.parse_args()
 
 # get the config path from the .env file
