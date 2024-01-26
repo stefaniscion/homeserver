@@ -5,9 +5,15 @@ then
     echo "***** updating system"
     sudo pacman -Syu --noconfirm
 
-    echo "***** installing utility packages"
+    echo "***** installing utility/devel packages"
     sudo pacman -Sy wget htop --noconfirm
     sudo pacman -S --needed base-devel --noconfirm
+    sudo pacman -S python --noconfirm
+
+    echo "***** setupping venv"
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install python-dotenv
 
     echo "***** installing yay"
     git clone https://aur.archlinux.org/yay.git
