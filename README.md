@@ -22,16 +22,20 @@ I wanted to have a modularization of the storage so i can add more storage easly
 To manage the backup of the data i decided to use **SnapRAID**.
 
 ## Host configuration
-I'm using Rocky Linux (9) as base OS. Then the commandands and the packages are for this OS. Feel free to use any other OS bya adapting the commands. 
+I'm using Arch Linux as base OS. Then the commands and the packages are for this OS. Feel free to use any other OS by adapting the commands.
 
 ### Install the base OS
 First install your base os on the server.
-I'm using Rocky Linux.
+I'm using Arch Linux.
+In my particular case i'm using an OrangePi 5B, so i'm using the specific image from the [following project from 7Ji](https://github.com/7Ji/orangepi5-archlinuxarm/)
 
-#### Why i choosed Rocky Linux?
-I love how ```yum``` and ```dnf``` manages the packages. Sadly i think that the main server alternative based on rpm, CentOS, is not anymore a good choice for a server, so i decided to use Rocky Linux.
+Please follow the installation guide of your OS to get a working system before proceding.
 
-You can find more info about Rocky Linux [here](https://rockylinux.org/).
+#### Why i choosed Arch Linux?
+I love how ```pacman``` manages the packages.
+I initially started the project with Rocky Linux, but i had some problems when i switched from a Raspberry PI 3B+ to an OrangePi 5B, so i decided to switch to Arch Linux.
+
+You can find more info about Arch Linux on the [Arch Linux Website](https://archlinux.org/).
 
 ### SSH into the server
 After the installation, you need to ssh into the server so you can do the installation process remotely.
@@ -39,7 +43,7 @@ After the installation, you need to ssh into the server so you can do the instal
 ### Installing Git
 First of all we need to install git to clone this repository.
 ```bash 
-sudo dnf install git
+sudo pacman -Sy git
 ```
 then clone that repository in your prefered working directory.
 ```bash 
@@ -54,29 +58,53 @@ To setup all base system, just run the following command:
 sh setup.sh
 ```
 Do now a reboot of the server to be sure that all packages are installed correctly.
+```bash
+sudo reboot
+```
 
-### Mounting the storage and set up MergerFS
+### Mounting the storages and set up MergerFS
 Now we need to mount the storage and set up MergerFS.
 First of all we need to create the mount points for the storage.
 Edit the file /etc/fstab and add the following lines for each physical drive:
 ```
-UUID={diskuuid} /mnt/data1 ext4 defaults,nofail 0 0
-UUID={diskuuid} /mnt/data2 ext4 defaults,nofail 0 0
-UUID={diskuuid} /mnt/parity1 ext4 defaults,nofail 0 0
+UUID={diskuuid} /mnt/data/data1 ext4 defaults,nofail 0 0
+UUID={diskuuid} /mnt/data/data2 ext4 defaults,nofail 0 0
+UUID={diskuuid} /mnt/parity/parity1 ext4 defaults,nofail 0 0
 ```
 Where {diskuuid} is the UUID of the disk. You can find it with the command:
 ```bash
 sudo blkid
 ```
+You ned now to create the mount points directories:
+```bash
+sudo mkdir /mnt/data
+sudo mkdir /mnt/data/data1
+sudo mkdir /mnt/data/data2
+sudo mkdir /mnt/parity
+sudo mkdir /mnt/parity/parity1
+```
 Also check for permission, i sudgest to give the permission to the user that will run the containers, i will use the user with uid 1000 and gid 1000.
 ```bash
-sudo chown -R 1000:1000 /mnt/data1
-sudo chown -R 1000:1000 /mnt/data2
-sudo chown -R 1000:1000 /mnt/parity1
+sudo chown -R 1000:1000 /mnt/data/*
+sudo chown -R 1000:1000 /mnt/parity/*
+```
+You can test the configuration the command:
+```bash
+sudo systemctl daemon-reload
+sudo mount -a
 ```
 Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
 ```
-/mnt/data1:/mnt/data2 /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
+/mnt/data/* /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
+```
+Again you need to create the mount point directory:
+```bash
+sudo mkdir /mnt/merger
+```
+Then you can test the configuration with the command:
+```bash
+sudo systemctl daemon-reload
+sudo mount -a
 ```
 
 ### Setup SnapRaid
@@ -84,11 +112,11 @@ Now we need to setup SnapRaid.
 First of all we need to create the configuration file, that will be located in /etc/snapraid.conf.
 I made an example file for the case below.
 ```
-parity /mnt/parity1/snapraid.parity
-data data1 /mnt/data1/
-data data2 /mnt/data2/
-content /mnt/data1/snapraid.content
-content /mnt/data2/snapraid.content
+parity /mnt/parity/parity1/snapraid.parity
+data data1 /mnt/data/data1/
+data data2 /mnt/data/data2/
+content /mnt/data/data1/snapraid.content
+content /mnt/data/data2/snapraid.content
 ```
 
 ## Docker configuration
@@ -122,32 +150,18 @@ You also need to change the port to connect to the service. Refer to the docker-
 Duckdns shouldn't need any specific configuration.
 
 ### Nextcloud
-First you need to connect your Nextcloud instance to the database. To do so, you need to go to the address https://localhost:9001 and login to the MariaDB instance with the user and password you setted up in the .env file.
+First you need to connect your Nextcloud instance to the database. To do so, you need to go to the address https://localhost:9001 and create a SQLite database.
 
-### Jellyfin
-Jellyfin shouldn't need any specific configuration.
+Then you need to create the admin user and password.
 
-## Usage
-You can now connect to all the services with the subdomain you created.
-
-## Troubleshooting
-### Selinux
-If you have selinux enabled, you need to allow the access to the folders used by the containers.
-```bash
-sudo semanage fcontext -a -t container_file_t "/mnt/data1(/.*)?"
-sudo semanage fcontext -a -t container_file_t "/mnt/data2(/.*)?"
-sudo semanage fcontext -a -t container_file_t "/mnt/parity1(/.*)?"
-sudo restorecon -Rv /mnt/data1
-sudo restorecon -Rv /mnt/data2
-sudo restorecon -Rv /mnt/parity1
-```
-### Nextcloud sync with filesystem
+#### Nextcloud sync with filesystem
 I made the following tuning to the Nextcloud instance:
-in ```config/www/nextcloud/config.php``` i added the following line to enable the filesystem file edit check.:
+in ```config/www/nextcloud/config/config.php``` i added the following line to enable the filesystem file edit check.:
 ```
    'filesystem_check_changes' => 1,
 ```
-### Nextcloud file upload limits
+
+#### Nextcloud file upload limits
 I added the following lines to the ```config/php/php-local.ini``` file, to increase the upload size limit:
 ```
 php_value upload_max_filesize 16G
@@ -159,5 +173,20 @@ and for the same reason, for the chunk assembly timeout, i added the following l
 ```
 fastcgi_read_timeout 3600s;
 ```
+
+### Jellyfin
+First you need to connect your Jellyfin instance to the database. To do so, you need to go to the address https://localhost:9002 and follow up the first setup by configuring your admin user and password and creating a media library.
+
+### Homeassistant
+Homeassistant needs to be configured to be used with a reverse proxy.
+To do so, you need to add the following lines to the ```config/homeassistant/configuration.yaml``` file:
+```yml
+http:
+  use_x_forwarded_for: true
+```
+
+## Usage
+You can now connect to all the services with the subdomain you created.
+
 ## TODO
 - Add snapraid cron configuration
