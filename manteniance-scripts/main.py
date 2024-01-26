@@ -4,6 +4,7 @@ from dotenv import dotenv_values
 from lib.make_config_backup import make_config_backup
 from lib.clean_config_backup_directory import clean_config_backup_directory
 
+
 # set up logging
 logging.basicConfig(level=logging.INFO)
 
@@ -12,18 +13,18 @@ config = dotenv_values("./services/.env")
 
 # get some paths
 config_path = config["CONFIG_PATH"]
-config_backup_path = os.path.join(config["STORAGE_PATH"]+"/config_bak/")
+config_backup_path = os.path.join(config["STORAGE_PATH"] + "/config_bak/")
 
-logging.info("* Making config backup...")
+logging.info("Making config backup...")
 make_config_backup(config_path, config_backup_path)
 
-logging.info("* Cleaning config backup directory...")
+logging.info("Cleaning config backup directory...")
 clean_config_backup_directory(config_backup_path)
 
-# logging.info("* Launching snapraid scrub...")
+# logging.info("Launching snapraid scrub...")
 # snapraid_scrub()
 
-# logging.info("* Launching snapraid sync...")
+# logging.info("Launching snapraid sync...")
 # sync()
 
-logging.info("* Done.")
+logging.info("Done.")
