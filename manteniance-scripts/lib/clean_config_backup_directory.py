@@ -14,7 +14,7 @@ def clean_config_backup_directory(config_backup_path):
         num_files_to_delete = len(files)-max_files
         files_to_delete = files[:num_files_to_delete]
         logging.info("- Files to delete: "+files_to_delete)
-        #delete the files
+        # delete the files
         for file_to_delete in files_to_delete:
             file_to_delete_path = os.path.join(config_backup_path, file_to_delete)
             os.remove(file_to_delete_path)
