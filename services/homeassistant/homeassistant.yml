@@ -1,17 +1,16 @@
-version: "3.8"
+version: "2.1"
 services:
-  nextcloud:
-    image: lscr.io/linuxserver/nextcloud:latest
-    container_name: nextcloud
+  homeassistant:
+    image: lscr.io/linuxserver/homeassistant:latest
+    container_name: homeassistant
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
     volumes:
-      - ../config/nextcloud/config:/config
-      - /mnt/merger/data:/data
+      - ${STORAGE_PATH}/config/homeassistant/config:/config
     ports:
-      - 9001:443
+      - 9003:8123
     restart: unless-stopped
     networks:
       - homeserver
