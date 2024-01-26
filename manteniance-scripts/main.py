@@ -15,7 +15,15 @@ config_path = config["CONFIG_PATH"]
 config_backup_path = os.path.join(config["STORAGE_PATH"]+"/config_bak/")
 
 logging.info("* Making config backup...")
-make_config_backup(config_path,config_backup_path)
+make_config_backup(config_path, config_backup_path)
 
 logging.info("* Cleaning config backup directory...")
 clean_config_backup_directory(config_backup_path)
+
+# logging.info("* Launching snapraid scrub...")
+# snapraid_scrub()
+
+# logging.info("* Launching snapraid sync...")
+# sync()
+
+logging.info("* Done.")
