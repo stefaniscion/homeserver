@@ -27,10 +27,14 @@ config_backup_path = os.path.join(config["STORAGE_PATH"] + "/config_bak/")
 if args.configbackup:
     logging.info("Making config backup...")
     make_config_backup(config_path, config_backup_path)
+else:
+    logging.info("Skipping config backup.")
 
 if args.cleanbackup:
     logging.info("Cleaning config backup directory...")
     clean_config_backup_directory(config_backup_path)
+else:
+    logging.info("Skipping config backup cleaning.")
 
 # TODO add snapraid sync and scrub
 
