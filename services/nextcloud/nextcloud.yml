@@ -10,8 +10,8 @@ services:
       - PGID=1000
       - TZ=Europe/Rome
     volumes:
-      - ${STORAGE_PATH}/config/nextcloud/config:/config
-      - ${STORAGE_PATH}/data:/data
+      - ${STORAGE_PATH?err}/config/nextcloud/config:/config
+      - ${STORAGE_PATH?err}/data:/data
     ports:
       - 9001:443
     restart: unless-stopped

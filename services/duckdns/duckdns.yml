@@ -9,12 +9,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
-      - SUBDOMAINS=${HOMESERVER_URL}
-      - TOKEN=${DUCKDNS_TOKEN}
+      - SUBDOMAINS=${HOMESERVER_URL?err}
+      - TOKEN=${DUCKDNS_TOKEN?err}
       - UPDATE_IP=ipv4
       - LOG_FILE=false
     volumes:
-      - ${STORAGE_PATH}/config/duckdns/config:/config
+      - ${STORAGE_PATH?err}/config/duckdns/config:/config
     restart: unless-stopped
     networks:
       - homeserver

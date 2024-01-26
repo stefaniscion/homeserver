@@ -11,12 +11,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
-      - URL=${HOMESERVER_URL}
+      - URL=${HOMESERVER_URL?err}
       - SUBDOMAINS=wildcard
       - VALIDATION=duckdns
-      - DUCKDNSTOKEN=${DUCKDNS_TOKEN}
+      - DUCKDNSTOKEN=${DUCKDNS_TOKEN?err}
     volumes:
-      - ${STORAGE_PATH}/config/swag/config:/config
+      - ${STORAGE_PATH?err}/config/swag/config:/config
     ports:
       - 443:443
       - 80:80

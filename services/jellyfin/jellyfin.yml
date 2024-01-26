@@ -9,10 +9,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Rome
-      - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL}
+      - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL?err}
     volumes:
-      - ${STORAGE_PATH}/config/jellyfin/config:/config
-      - ${STORAGE_PATH}/data/__groupfolders/1:/data
+      - ${STORAGE_PATH?err}/config/jellyfin/config:/config
+      - ${STORAGE_PATH?err}/data/__groupfolders/1:/data
     ports:
       - 9002:8096
     restart: unless-stopped
