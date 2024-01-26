@@ -24,12 +24,16 @@ config = dotenv_values("./services/.env")
 config_path = config["CONFIG_PATH"]
 config_backup_path = os.path.join(config["STORAGE_PATH"] + "/config_bak/")
 
+# run the operations
+
+# start config backup
 if args.configbackup:
     logging.info("Making config backup...")
     make_config_backup(config_path, config_backup_path)
 else:
     logging.info("Skipping config backup.")
 
+# clean config backup directory
 if args.cleanbackup:
     logging.info("Cleaning config backup directory...")
     clean_config_backup_directory(config_backup_path)
