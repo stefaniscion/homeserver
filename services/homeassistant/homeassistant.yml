@@ -5,6 +5,7 @@ services:
     container_name: homeassistant
     env_file:
       - path: ../.env
+        required: true
     environment:
       - PUID=1000
       - PGID=1000
