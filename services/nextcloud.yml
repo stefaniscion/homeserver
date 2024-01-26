@@ -12,24 +12,6 @@ services:
       - /mnt/merger/data:/data
     ports:
       - 9001:443
-    depends_on:
-      - nextcloud-mariadb
-    links:
-      - nextcloud-mariadb
-    restart: unless-stopped
-    networks:
-      - homeserver
-  nextcloud-mariadb:
-    image: lscr.io/linuxserver/mariadb:latest
-    container_name: nextcloud-mariadb
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - MYSQL_ROOT_PASSWORD=${NEXTCLOUD_DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=nextcloud #optional
-    volumes:
-      - ../config/nextcloud-mariadb/config:/config
     restart: unless-stopped
     networks:
       - homeserver
