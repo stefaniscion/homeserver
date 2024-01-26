@@ -127,6 +127,8 @@ Now we need to create the .env file in the project directory, with the secret us
 HOMESERVER_URL=
 DUCKDNS_TOKEN=
 NEXTCLOUD_DB_ROOT_PASSWORD=
+STORAGE_PATH=
+CONFIG_PATH=
 ```
 This data will be used by the Docker-compose to setup the containers.
 
@@ -173,6 +175,8 @@ and for the same reason, for the chunk assembly timeout, i added the following l
 ```
 fastcgi_read_timeout 3600s;
 ```
+
+Refear to the [this page](https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/big_file_upload_configuration.html) for more info.
 
 ### Jellyfin
 First you need to connect your Jellyfin instance to the database. To do so, you need to go to the address https://localhost:9002 and follow up the first setup by configuring your admin user and password and creating a media library.
