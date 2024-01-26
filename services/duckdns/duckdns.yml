@@ -12,7 +12,7 @@ services:
       - UPDATE_IP=ipv4
       - LOG_FILE=false
     volumes:
-      - ${STORAGE_PATH?err}/config/duckdns/config:/config
+      - ${CONFIG_PATH?err}/duckdns/config:/config
     restart: unless-stopped
     networks:
       - homeserver

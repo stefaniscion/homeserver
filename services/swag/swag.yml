@@ -14,7 +14,7 @@ services:
       - VALIDATION=duckdns
       - DUCKDNSTOKEN=${DUCKDNS_TOKEN?err}
     volumes:
-      - ${STORAGE_PATH?err}/config/swag/config:/config
+      - ${CONFIG_PATH?err}/swag/config:/config
     ports:
       - 443:443
       - 80:80

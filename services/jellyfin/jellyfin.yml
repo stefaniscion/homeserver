@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Rome
       - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL?err}
     volumes:
-      - ${STORAGE_PATH?err}/config/jellyfin/config:/config
+      - ${CONFIG_PATH?err}/jellyfin/config:/config
       - ${STORAGE_PATH?err}/data/__groupfolders/1:/data
     ports:
       - 9002:8096
