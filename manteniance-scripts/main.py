@@ -11,7 +11,7 @@ config_path = config["CONFIG_PATH"]
 config_backup_path = os.path.join(config["STORAGE_PATH"]+"/config_bak/")
 
 print("* Making config backup...")
-#make_config_backup(config_path,config_backup_path)
+make_config_backup(config_path,config_backup_path)
 
 print("* Cleaning config backup directory...")
 clean_config_backup_directory(config_backup_path)
