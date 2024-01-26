@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  duckdns:
+    extends:
+      file: duckdns/duckdns.yml
+      service: duckdns
+  swag:
+    extends:
+      file: swag/swag.yml
+      service: swag
+  nextcloud:
+    extends:
+      file: nextcloud/nextcloud.yml
+      service: nextcloud
+  homeassistant:
+    extends:
+      file: homeassistant/homeassistant.yml
+      service: homeassistant
+  jellyfin:
+    extends:
+      file: jellyfin/jellyfin.yml
+      service: jellyfin
+networks:
+  homeserver:
+    name: homeserver
+    external: true
+   

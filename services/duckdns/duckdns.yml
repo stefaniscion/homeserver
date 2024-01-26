@@ -16,10 +16,3 @@ services:
     restart: unless-stopped
     networks:
       - homeserver
-networks:
-  homeserver:
-    name: homeserver
-    external: true
-env_file:
-  - path: ../.env
-    required: true
