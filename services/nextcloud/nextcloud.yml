@@ -3,9 +3,6 @@ services:
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud
-    env_file:
-      - path: ../.env
-        required: true
     environment:
       - PUID=1000
       - PGID=1000
@@ -22,3 +19,6 @@ networks:
   homeserver:
     name: homeserver
     external: true
+env_file:
+  - path: ../.env
+    required: true

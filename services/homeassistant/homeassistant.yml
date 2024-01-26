@@ -3,9 +3,6 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
-    env_file:
-      - path: ../.env
-        required: true
     environment:
       - PUID=1000
       - PGID=1000
@@ -21,3 +18,6 @@ networks:
   homeserver:
     name: homeserver
     external: true
+env_file:
+  - path: ../.env
+    required: true
