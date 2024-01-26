@@ -1,4 +1,4 @@
-import dotenv
+from dotenv import dotenv_values
 from os.path import join
 from lib.make_config_backup import make_config_backup
 
