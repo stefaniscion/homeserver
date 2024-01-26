@@ -3,6 +3,8 @@ services:
   homeassistant:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
+    env_file:
+      - path: ../.env
     environment:
       - PUID=1000
       - PGID=1000

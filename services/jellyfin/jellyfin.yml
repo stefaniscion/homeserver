@@ -3,6 +3,8 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    env_file:
+      - path: ../.env
     environment:
       - PUID=1000
       - PGID=1000

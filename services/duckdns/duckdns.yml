@@ -3,6 +3,8 @@ services:
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
+    env_file:
+      - path: ../.env
     environment:
       - PUID=1000
       - PGID=1000
