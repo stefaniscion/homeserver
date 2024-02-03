@@ -1,4 +1,5 @@
 import os
+import logging
 import tarfile
 from datetime import datetime
 
@@ -12,4 +13,7 @@ def make_config_backup(config_path, config_backup_path):
     archive_name = "config_bak_" + now_string + ".tar.xz"
     # archive the config directory in a .tar.xz
     with tarfile.open(os.path.join(config_backup_path, archive_name), "w:xz") as tar:
-        tar.add(config_path)
+        try:
+            tar.add(config_path)
+        except Exception as e:
+            logging.warning("Error while adding the config directory to the archive: " + str(e))
