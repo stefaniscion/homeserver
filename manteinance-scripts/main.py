@@ -4,6 +4,8 @@ import argparse
 from dotenv import dotenv_values
 from lib.make_config_backup import make_config_backup
 from lib.clean_config_backup_directory import clean_config_backup_directory
+from lib.snapraid_scrub import snapraid_scrub
+from lib.snapraid_sync import snapraid_sync
 
 
 # set up logging
@@ -17,6 +19,12 @@ parser.add_argument('--snapraidscrub', action=argparse.BooleanOptionalAction, de
 parser.add_argument('--snapraidsync', action=argparse.BooleanOptionalAction, default=True)
 args = parser.parse_args()
 
+# valorize things to do
+do_config_backup = args.configbackup
+do_clean_backup = args.cleanbackup
+do_snapraid_scrub = args.snapraidscrub
+do_snapraid_sync = args.snapraidsync
+
 # get the config path from the .env file
 config = dotenv_values("./services/.env")
 
@@ -27,7 +35,7 @@ config_backup_path = os.path.join(config["STORAGE_PATH"] + "/config_bak/")
 # run the operations
 
 # start config backup
-if args.configbackup:
+if do_config_backup:
     logging.info("Making config backup...")
     try:
         make_config_backup(config_path, config_backup_path)
@@ -37,20 +45,33 @@ else:
     logging.info("Skipping config backup.")
 
 # clean config backup directory
-if args.cleanbackup:
+if do_clean_backup:
     logging.info("Cleaning config backup directory...")
     try:
         clean_config_backup_directory(config_backup_path)
     except Exception as e:
-        logging.error("Error while cleaning config backup directory: " + str(e)
+        logging.error("Error while cleaning config backup directory: " + str(e))
 else:
     logging.info("Skipping config backup cleaning.")
 
+# do snapraid scrub
+if do_snapraid_scrub:
+    logging.info("Launching snapraid scrub...")
+    try:
+        snapraid_scrub()
+    except Exception as e:
+        logging.error("Error while launching snapraid scrub: " + str(e))
+else:
+    logging.info("Skipping snapraid scrub.")
 
-# logging.info("Launching snapraid scrub...")
-# snapraid_scrub()
-
-# logging.info("Launching snapraid sync...")
-# sync()
+# do snapraid sync
+if do_snapraid_sync:
+    logging.info("Launching snapraid sync...")
+    try:
+        snapraid_sync()
+    except Exception as e:
+        logging.error("Error while launching snapraid sync: " + str(e))
+else:
+    logging.info("Skipping snapraid sync.")
 
 logging.info("Done.")
