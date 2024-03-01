@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  nextcloud:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+    restart: unless-stopped
+    networks:
+      - homeserver
