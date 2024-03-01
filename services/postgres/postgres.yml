@@ -4,7 +4,7 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?err}
     restart: unless-stopped
     networks:
       - homeserver
