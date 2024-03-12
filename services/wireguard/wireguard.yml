@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
+      - SERVERURL=wireguard.${HOMESERVER_URL?err}
+      volumes:
+      - ${CONFIG_PATH?err}/wireguard/config:/config
+      - ${CONFIG_PATH?err}/wireguard/lib/modules:/lib/modules
+    volumes:
+      - ${CONFIG_PATH?err}/nextcloud/config:/config
+      - ${STORAGE_PATH?err}/data:/data
+    ports:
+      - 9004:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+    networks:
+      - homeserver

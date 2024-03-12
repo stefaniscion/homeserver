@@ -4,9 +4,9 @@ services:
     image: lscr.io/linuxserver/homeassistant:latest
     container_name: homeassistant
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Rome
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
     volumes:
       - ${CONFIG_PATH?err}/homeassistant/config:/config
     ports:

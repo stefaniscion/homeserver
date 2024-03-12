@@ -4,9 +4,9 @@ services:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Rome
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
     volumes:
       - ${CONFIG_PATH?err}/nextcloud/config:/config
       - ${STORAGE_PATH?err}/data:/data

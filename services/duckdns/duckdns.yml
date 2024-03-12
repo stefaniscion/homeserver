@@ -4,9 +4,9 @@ services:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Rome
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
       - SUBDOMAINS=${HOMESERVER_URL?err}
       - TOKEN=${DUCKDNS_TOKEN?err}
       - UPDATE_IP=ipv4

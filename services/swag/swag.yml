@@ -6,9 +6,9 @@ services:
     cap_add:
       - NET_ADMIN
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Rome
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
       - URL=${HOMESERVER_URL?err}
       - SUBDOMAINS=wildcard
       - VALIDATION=duckdns

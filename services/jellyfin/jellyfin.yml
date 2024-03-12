@@ -4,9 +4,9 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Rome
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
       - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL?err}
     volumes:
       - ${CONFIG_PATH?err}/jellyfin/config:/config

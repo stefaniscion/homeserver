@@ -24,6 +24,10 @@ services:
     extends:
       file: postgres/postgres.yml
       service: postgres
+  wireguard:
+    extends:
+      file: wireguard/wireguard.yml
+      service: wireguard
 networks:
   homeserver:
     name: homeserver
