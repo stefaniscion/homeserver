@@ -1,14 +1,17 @@
 # My Homeserver
 This is my personal homeserver setup. I wanted some features and settings that i didn't find in other homeserver setups. So i decided to create my own. I'm sharing this with you so you can use it as a base for your own homeserver.
 
-## Stack Structure
+## Docker-compose Stack Structure
 
-| Service       | Dns Url         | External Port | Internal Port |
-|---------------|-----------------|---------------|---------------|
-| swag          | www.*           | 80,443        | 80,443        |
-| nextcloud     | nextcloud.*     | 9001          | 443           |
-| jellyfin      | jellyfin.*      | 9002          | 8096          |
-| homeassistant | homeassistant.* | 9003          | 8123          |
+| Service               | Dns Url         | External Port | Internal Port |
+|-----------------------|-----------------|---------------|---------------|
+| swag                  | www.*           | 80,443        | 80,443        |
+| duckdns               | ---             | ---           | ---           |
+| nextcloud             | nextcloud.*     | 9001          | 443           |
+| -> nextcloud-postgres | ---             | ---           | ---           |
+| jellyfin              | jellyfin.*      | 9002          | 8096          |
+| homeassistant         | homeassistant.* | 9003          | 8123          |
+| wireguard             | wireguard.*     | 9004          | 51820         |
 
 ## Features
 I setup my homeserver with some specification in mind.
