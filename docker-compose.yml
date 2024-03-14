@@ -2,31 +2,31 @@ version: "3.8"
 services:
   duckdns:
     extends:
-      file: duckdns/duckdns.yml
+      file: services/duckdns.yml
       service: duckdns
   swag:
     extends:
-      file: swag/swag.yml
+      file: services/swag.yml
       service: swag
   nextcloud:
     extends:
-      file: nextcloud/nextcloud.yml
+      file: services/nextcloud.yml
       service: nextcloud
   homeassistant:
     extends:
-      file: homeassistant/homeassistant.yml
+      file: services/homeassistant.yml
       service: homeassistant
   jellyfin:
     extends:
-      file: jellyfin/jellyfin.yml
+      file: services/jellyfin.yml
       service: jellyfin
   postgres:
     extends:
-      file: postgres/postgres.yml
+      file: services/postgres.yml
       service: postgres
   wireguard:
     extends:
-      file: wireguard/wireguard.yml
+      file: services/wireguard.yml
       service: wireguard
 networks:
   homeserver:

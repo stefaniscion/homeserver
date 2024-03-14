@@ -5,6 +5,8 @@ services:
     container_name: postgres
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?err}
+    volumes:
+      - ${CONFIG_PATH?err}/postgres/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     restart: unless-stopped
