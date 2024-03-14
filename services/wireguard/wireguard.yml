@@ -11,11 +11,12 @@ services:
       - PGID=${PGID?err}
       - TZ=${TZ?err}
       - SERVERURL=wireguard.${HOMESERVER_URL?err}
+      - PEERS=1
     volumes:
       - ${CONFIG_PATH?err}/wireguard/config:/config
       - ${CONFIG_PATH?err}/wireguard/lib/modules:/lib/modules
     ports:
-      - 9004:51820/udp
+      - 51820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
