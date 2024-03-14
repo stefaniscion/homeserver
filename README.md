@@ -11,7 +11,7 @@ This is my personal homeserver setup. I wanted some features and settings that i
 | -> nextcloud-postgres | ---             | ---           | ---           |
 | jellyfin              | jellyfin.*      | 9002          | 8096          |
 | homeassistant         | homeassistant.* | 9003          | 8123          |
-| wireguard             | wireguard.*     | 9004          | 51820         |
+| wireguard             | wireguard.*     | 51820          | 51820         |
 
 ## Features
 I setup my homeserver with some specification in mind.
@@ -35,8 +35,8 @@ In my particular case i'm using an OrangePi 5B, so i'm using the specific image 
 Please follow the installation guide of your OS to get a working system before proceding.
 
 #### Why i choosed Arch Linux?
-I love how ```pacman``` manages the packages.
-I initially started the project with Rocky Linux, but i had some problems when i switched from a Raspberry PI 3B+ to an OrangePi 5B, so i decided to switch to Arch Linux.
+I love how ```pacman``` manages the packages and the minimalist philosophy of Arch.
+Initially i started the project with Rocky Linux, but i had some problems when i switched from a Raspberry PI 3B+ to an OrangePi 5B, so i decided to switch to Arch Linux.
 
 You can find more info about Arch Linux on the [Arch Linux Website](https://archlinux.org/).
 
