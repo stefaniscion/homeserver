@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  nextcloud:
+  wireguard:
     image: lscr.io/linuxserver/wireguard:latest
     container_name: wireguard
     cap_add:
@@ -11,12 +11,9 @@ services:
       - PGID=${PGID?err}
       - TZ=${TZ?err}
       - SERVERURL=wireguard.${HOMESERVER_URL?err}
-      volumes:
+    volumes:
       - ${CONFIG_PATH?err}/wireguard/config:/config
       - ${CONFIG_PATH?err}/wireguard/lib/modules:/lib/modules
-    volumes:
-      - ${CONFIG_PATH?err}/nextcloud/config:/config
-      - ${STORAGE_PATH?err}/data:/data
     ports:
       - 9004:51820/udp
     sysctls:
