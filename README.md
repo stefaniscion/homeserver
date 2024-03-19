@@ -8,10 +8,10 @@ This is my personal homeserver setup. I wanted some features and settings that i
 | swag                  | www.*           | 80,443        | 80,443        |
 | duckdns               | ---             | ---           | ---           |
 | nextcloud             | nextcloud.*     | 9001          | 443           |
-| -> nextcloud-postgres | ---             | ---           | ---           |
+| postgres              | ---             | ---           | ---           |
 | jellyfin              | jellyfin.*      | 9002          | 8096          |
 | homeassistant         | homeassistant.* | 9003          | 8123          |
-| wireguard             | wireguard.*     | 51820          | 51820         |
+| wireguard             | wireguard.*     | 51820         | 51820         |
 
 ## Features
 I setup my homeserver with some specification in mind.
