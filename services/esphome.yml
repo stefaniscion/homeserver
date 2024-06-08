@@ -1,10 +1,10 @@
 version: '3'
 services:
   esphome:
-    container_name: esphome
     image: ghcr.io/esphome/esphome
+    container_name: esphome
     volumes:
-      - ${CONFIG_PATH?err}/config:/config
+      - ${CONFIG_PATH?err}/esphome/config:/config
       - /etc/localtime:/etc/localtime:ro
     privileged: true
     environment:
