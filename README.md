@@ -11,6 +11,7 @@ This is my personal homeserver setup. I wanted some features and settings that i
 | jellyfin              | jellyfin.*      | 9002          | 8096          |
 | homeassistant         | homeassistant.* | 9003          | 8123          |
 | postgres              | ---             | 5432          | 5432          |
+| esphome               | ---             | 6052          | 6052          |
 | wireguard             | wireguard.*     | 51820         | 51820         |
 
 ## Features

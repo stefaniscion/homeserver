@@ -10,6 +10,8 @@ services:
     environment:
       - USERNAME=esphome
       - PASSWORD=${ESPHOME_PASSWORD?err}
+    ports:
+      - 6052:6052
     restart: unless-stopped
     networks:
       - homeserver
