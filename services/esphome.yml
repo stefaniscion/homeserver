@@ -1,0 +1,16 @@
+version: '3'
+services:
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome
+    volumes:
+      - ${CONFIG_PATH?err}/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    privileged: true
+    environment:
+      - USERNAME=esphome
+      - PASSWORD=${ESPHOME_PASSWORD?err}
+    restart: unless-stopped
+    networks:
+      - homeserver

@@ -8,9 +8,9 @@ This is my personal homeserver setup. I wanted some features and settings that i
 | swag                  | www.*           | 80,443        | 80,443        |
 | duckdns               | ---             | ---           | ---           |
 | nextcloud             | nextcloud.*     | 9001          | 443           |
-| postgres              | ---             | ---           | ---           |
 | jellyfin              | jellyfin.*      | 9002          | 8096          |
 | homeassistant         | homeassistant.* | 9003          | 8123          |
+| postgres              | ---             | 5432          | 5432          |
 | wireguard             | wireguard.*     | 51820         | 51820         |
 
 ## Features
@@ -191,6 +191,23 @@ To do so, you need to add the following lines to the ```config/homeassistant/con
 http:
   use_x_forwarded_for: true
 ```
+
+## Add a service
+If you want to add a service you have follow some steps.
+
+### add the service yml in services folder
+First you need to create the service yml file in the services folder that contains the docker-compose yml code specific to that service.
+By defauly you have to specify the following parameters:
+```
+networks:
+  - homeserver
+```
+
+### Add the service to the docker-compose.yml file
+Then you need to add the service to the docker-compose.yml file in the root of the project, linking the service yml file.
+
+### Add secrets to the .env file
+You also need to add the secrets needed by the service to the .env file.
 
 ## Usage
 You can now connect to all the services with the subdomain you created.
