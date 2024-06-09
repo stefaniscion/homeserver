@@ -99,7 +99,7 @@ sudo mount -a
 ```
 Now we need to create the mount point for the MergerFS pool. Edit the file /etc/fstab and add the following line:
 ```
-/mnt/data/* /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,uid=1000,gid=1000 0 0
+/mnt/data/* /mnt/merger fuse.mergerfs cache.files=partial,dropcacheonclose=true,category.create=mfs,func.getattr=newest,uid=1000,gid=1000 0 0
 ```
 Again you need to create the mount point directory:
 ```bash
