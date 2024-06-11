@@ -1,2 +1,2 @@
-docker compose -f services/docker-compose.yml pull
-docker compose -f services/docker-compose.yml up -d
+docker compose pull
+docker compose up -d
