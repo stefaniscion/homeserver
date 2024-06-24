@@ -7,9 +7,9 @@ This is my personal homeserver setup. I wanted some features and settings that i
 |-----------------------|-----------------|---------------|---------------|
 | swag                  | www.*           | 80,443        | 80,443        |
 | duckdns               | ---             | ---           | ---           |
-| nextcloud             | nextcloud.*     | 9001          | 443           |
-| jellyfin              | jellyfin.*      | 9002          | 8096          |
-| homeassistant         | homeassistant.* | 9003          | 8123          |
+| nextcloud             | nextcloud.*     | 9443          | 443           |
+| jellyfin              | jellyfin.*      | 8096          | 8096          |
+| homeassistant         | homeassistant.* | 8123          | 8123          |
 | postgres              | ---             | 5432          | 5432          |
 | esphome               | ---             | 6052          | 6052          |
 | wireguard             | wireguard.*     | 51820         | 51820         |
