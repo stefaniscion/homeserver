@@ -1,7 +1,7 @@
 version: '3'
 services:
   esphome:
-    image: ghcr.io/esphome/esphome
+    image: esphome/esphome
     container_name: esphome
     volumes:
       - ${CONFIG_PATH?err}/esphome/config:/config

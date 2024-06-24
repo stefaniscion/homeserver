@@ -12,7 +12,7 @@ services:
       - ${CONFIG_PATH?err}/jellyfin/config:/config
       - ${STORAGE_PATH?err}/data/__groupfolders/1:/data
     ports:
-      - 9002:8096
+      - 8096:8096
     restart: unless-stopped
     networks:
       - homeserver

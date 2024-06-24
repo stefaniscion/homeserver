@@ -10,7 +10,7 @@ services:
     volumes:
       - ${CONFIG_PATH?err}/homeassistant/config:/config
     ports:
-      - 9003:8123
+      - 8123:8123
     restart: unless-stopped
     networks:
       - homeserver
