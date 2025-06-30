@@ -27,14 +27,14 @@ services:
     extends:
       file: services/wireguard.yml
       service: wireguard
-  esphome:
-    extends:
-      file: services/esphome.yml
-      service: esphome
   homepage:
     extends:
       file: services/homepage.yml
       service: homepage
+  esphome:
+    extends:
+      file: services/esphome.yml
+      service: esphome
 networks:
   homeserver:
     name: homeserver
