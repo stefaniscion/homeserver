@@ -13,6 +13,7 @@ This is my personal homeserver setup. I wanted some features and settings that i
 | postgres              | ---             | 5432          | 5432          |
 | esphome               | ---             | 6052          | 6052          |
 | wireguard             | wireguard.*     | 51820         | 51820         |
+| homepage              | homepage .*     | 3000          | 3000          |
 
 ## Features
 I setup my homeserver with some specification in mind.
