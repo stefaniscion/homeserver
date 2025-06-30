@@ -31,6 +31,10 @@ services:
     extends:
       file: services/esphome.yml
       service: esphome
+  homepage:
+    extends:
+      file: services/homepage.yml
+      service: homepage
 networks:
   homeserver:
     name: homeserver
