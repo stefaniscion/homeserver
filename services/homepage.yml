@@ -1,0 +1,17 @@
+version: '3'
+services:
+  esphome:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    volumes:
+      - ${CONFIG_PATH?err}/homepage/app/config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS: ${HOMESERVER_URL?err}
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    networks:
+      - homeserver
