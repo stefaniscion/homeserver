@@ -9,7 +9,7 @@ services:
     privileged: true
     environment:
       - USERNAME=esphome
-      - PASSWORD=${ESPHOME_PASSWORD?err}
+      - PASSWORD>:${ESPHOME_PASSWORD?err}
     ports:
       - 6052:6052
       - 6053:6053

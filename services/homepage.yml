@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  esphome:
+  homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     volumes:
@@ -9,7 +9,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     privileged: true
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS: ${HOMESERVER_URL?err}
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMESERVER_URL?err}
     ports:
       - 3000:3000
     restart: unless-stopped
