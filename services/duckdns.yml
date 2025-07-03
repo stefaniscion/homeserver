@@ -11,6 +11,12 @@ services:
       - TOKEN=${DUCKDNS_TOKEN?err}
       - UPDATE_IP=ipv4
       - LOG_FILE=false
+    labels:
+    - homepage.group=Network
+    - homepage.name=Duck DNS
+    - homepage.icon=duckdns.svg
+    - homepage.description=Duck DNS
+    - homepage.siteMonitor=https://nishh.duckdns.org
     volumes:
       - ${CONFIG_PATH?err}/duckdns/config:/config
     restart: unless-stopped

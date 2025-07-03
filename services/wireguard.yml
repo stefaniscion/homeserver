@@ -12,6 +12,11 @@ services:
       - TZ=${TZ?err}
       - SERVERURL=wireguard.${HOMESERVER_URL?err}
       - PEERS=1
+    labels:
+      - homepage.group=Network
+      - homepage.name=Duck DNS
+      - homepage.icon=wireguard.svg
+      - homepage.description=Wireguard
     volumes:
       - ${CONFIG_PATH?err}/wireguard/config:/config
       - ${CONFIG_PATH?err}/wireguard/lib/modules:/lib/modules
