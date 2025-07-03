@@ -7,6 +7,9 @@ services:
       - ${CONFIG_PATH?err}/homepage/app/config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
+      - /mnt/data/data1:/mnt/data/data1
+      - /mnt/data/data2:/mnt/data/data2
+      - /mnt/parity/parity1:/mnt/parity/parity1
     privileged: true
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=homepage.${HOMESERVER_URL?err}
