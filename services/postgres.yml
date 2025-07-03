@@ -5,10 +5,6 @@ services:
     container_name: postgres
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?err}
-    labels:
-      - homepage.group=Database
-      - homepage.name=Postgres
-      - homepage.icon=postgres.svg
     volumes:
       - ${CONFIG_PATH?err}/postgres/data:/var/lib/postgresql/data
     ports:

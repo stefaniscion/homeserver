@@ -8,13 +8,6 @@ services:
       - PGID=${PGID?err}
       - TZ=${TZ?err}
       - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL?err}
-    labels:
-      - homepage.group=Cloud
-      - homepage.name=Jellyfin
-      - homepage.icon=jellyfin.svg
-      - homepage.href=https://jellyfin.nishh.duckdns.org
-      - homepage.description=Jellyfin
-      - homepage.siteMonitor=https://jellyfin.nishh.duckdns.org
     volumes:
       - ${CONFIG_PATH?err}/jellyfin/config:/config
       - ${STORAGE_PATH?err}/data/__groupfolders/1:/data

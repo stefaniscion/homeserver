@@ -7,13 +7,6 @@ services:
       - PUID=${PUID?err}
       - PGID=${PGID?err}
       - TZ=${TZ?err}
-    labels:
-      - homepage.group=Cloud
-      - homepage.name=Nextcloud
-      - homepage.icon=nextcloud.svg
-      - homepage.href=https://nextcloud.nishh.duckdns.org
-      - homepage.description=Nextcloud
-      - homepage.siteMonitor=https://nextcloud.nishh.duckdns.org
     volumes:
       - ${CONFIG_PATH?err}/nextcloud/config:/config
       - ${STORAGE_PATH?err}/data:/data

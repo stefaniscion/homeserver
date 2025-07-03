@@ -13,13 +13,6 @@ services:
       - SUBDOMAINS=wildcard
       - VALIDATION=duckdns
       - DUCKDNSTOKEN=${DUCKDNS_TOKEN?err}
-    labels:
-      - homepage.group=Network
-      - homepage.name=SWAG
-      - homepage.icon=linuxserver-io.svg
-      - homepage.href=https://nishh.duckdns.org
-      - homepage.description=SWAG
-      - homepage.siteMonitor=https://nishh.duckdns.org
     volumes:
       - ${CONFIG_PATH?err}/swag/config:/config
     ports:

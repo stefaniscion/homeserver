@@ -10,13 +10,6 @@ services:
     environment:
       - USERNAME=esphome
       - PASSWORD>:${ESPHOME_PASSWORD?err}
-    labels:
-      - homepage.group=Home Automation
-      - homepage.name=ESP Home
-      - homepage.icon=esphome.svg
-      - homepage.href=https://esphome.nishh.duckdns.org
-      - homepage.description=ESP Home
-      - homepage.siteMonitor=https://esphome.nishh.duckdns.org
     ports:
       - 6052:6052
       - 6053:6053

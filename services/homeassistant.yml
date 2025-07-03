@@ -7,13 +7,6 @@ services:
       - PUID=${PUID?err}
       - PGID=${PGID?err}
       - TZ=${TZ?err}
-    labels:
-      - homepage.group=Home Automation
-      - homepage.name=Home Assistant
-      - homepage.icon=home-assistant.svg
-      - homepage.href=https://homeassistant.nishh.duckdns.org
-      - homepage.description=Home Assistant
-      - homepage.siteMonitor=https://homeassistant.nishh.duckdns.org
     volumes:
       - ${CONFIG_PATH?err}/homeassistant/config:/config
     ports:
