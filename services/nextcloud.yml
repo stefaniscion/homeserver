@@ -10,6 +10,8 @@ services:
     volumes:
       - ${CONFIG_PATH?err}/nextcloud/config:/config
       - ${STORAGE_PATH?err}/data:/data
+      - ${STORAGE_PATH?err}/media:/mnt/media
+      - ${STORAGE_PATH?err}/syncthing:/mnt/syncthing
     ports:
       - 9443:443
     restart: unless-stopped

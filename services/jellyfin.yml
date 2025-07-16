@@ -10,7 +10,7 @@ services:
       - JELLYFIN_PublishedServerUrl=${HOMESERVER_URL?err}
     volumes:
       - ${CONFIG_PATH?err}/jellyfin/config:/config
-      - ${STORAGE_PATH?err}/data/__groupfolders/1:/data
+      - ${STORAGE_PATH?err}/media:/data/media
     ports:
       - 8096:8096
     restart: unless-stopped
