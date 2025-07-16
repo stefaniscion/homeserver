@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    environment:
+      - PUID=${PUID?err}
+      - PGID=${PGID?err}
+      - TZ=${TZ?err}
+    volumes:
+      - ${CONFIG_PATH?err}/syncthing/config:/config
+      - ${STORAGE_PATH?err}/syncthing:/data
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped
+    networks:
+      - homeserver

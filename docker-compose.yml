@@ -35,6 +35,10 @@ services:
     extends:
       file: services/esphome.yml
       service: esphome
+  syncthing:
+    extends:
+      file: services/syncthing.yml
+      service: syncthing
 networks:
   homeserver:
     name: homeserver
