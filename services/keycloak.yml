@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    command: start --proxy-headers xforwarded
+    environment:
+      KC_HOSTNAME: keycloak.${HOMESERVER_URL?err}
+      KC_PROXY: edge
+      KC_HTTP_ENABLED: true
+      KEYCLOAK_ADMIN: keycloak
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD?err}
+    volumes:
+      - ${CONFIG_PATH?err}/keycloak/data:/opt/keycloak/data
+    restart: unless-stopped
+    networks:
+      - homeserver
