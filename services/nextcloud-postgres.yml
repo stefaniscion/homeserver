@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  nextcloud-postgres:
+    image: postgres:latest
+    container_name: nextcloud-postgres
+    environment:
+      - NEXTCLOUD_POSTGRES_PASSWORD=${NEXTCLOUD_POSTGRES_PASSWORD?err}
+    volumes:
+      - ${CONFIG_PATH?err}/nextcloud-postgres/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    networks:
+      - homeserver

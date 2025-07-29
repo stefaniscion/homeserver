@@ -19,10 +19,10 @@ services:
     extends:
       file: services/jellyfin.yml
       service: jellyfin
-  postgres:
+  nextcloud-postgres:
     extends:
-      file: services/postgres.yml
-      service: postgres
+      file: services/nextcloud-postgres.yml
+      service: nextcloud-postgres
   wireguard:
     extends:
       file: services/wireguard.yml
@@ -31,10 +31,6 @@ services:
     extends:
       file: services/homepage.yml
       service: homepage
-  esphome:
-    extends:
-      file: services/esphome.yml
-      service: esphome
   syncthing:
     extends:
       file: services/syncthing.yml
