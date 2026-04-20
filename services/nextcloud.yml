@@ -12,8 +12,9 @@ services:
       - ${STORAGE_PATH?err}/data:/data
       - ${STORAGE_PATH?err}/media:/mnt/media
       - ${STORAGE_PATH?err}/syncthing:/mnt/syncthing
+      - ${STORAGE_PATH?err}/downloads:/mnt/downloads
     ports:
-      - 9443:443
+      - 9401:443
     restart: unless-stopped
     networks:
       - homeserver

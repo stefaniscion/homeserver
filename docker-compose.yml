@@ -31,16 +31,15 @@ services:
     extends:
       file: services/homepage.yml
       service: homepage
+  qbittorrent:
+    extends:
+      file: services/qbittorrent.yml
+      service: qbittorrent
   syncthing:
     extends:
       file: services/syncthing.yml
       service: syncthing
-  keycloak:
-    extends:
-      file: services/keycloak.yml
-      service: keycloak
 networks:
   homeserver:
     name: homeserver
     external: true
-   
