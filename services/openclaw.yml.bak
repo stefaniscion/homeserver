@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw    
+    volumes:
+      - ${CONFIG_PATH?err}/openclaw/config:/app/config
+      - ${STORAGE_PATH?err}/openclaw/workspace:/app/workspace
+    environment:
+      - OPENCLAW_WORKSPACE_DIR=/app/workspace
+      - OPENCLAW_CONFIG_DIR=/app/config
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TZ=Europe/Rome
+    ports:
+      - 18789:18789
+    restart: unless-stopped
+    networks:
+      - homeserver
