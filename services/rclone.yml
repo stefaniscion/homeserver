@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  rclone:
+    image: rclone/rclone:latest
+    container_name: rclone
+    user: "${PUID?err}:${PGID?err}"
+    environment:
+      - TZ=${TZ?err}
+    volumes:
+      - ${CONFIG_PATH?err}/rclone:/config/rclone
+      - ${STORAGE_PATH?err}/syncthing:/data:ro
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        while true; do
+          echo "[$$(date)] Avvio sincronizzazione Obsidian -> Google Drive"
+          rclone copy \
+            "/data/syncthing" \
+            "gdrive:Obsidian" \
+            --create-empty-src-dirs \
+            --log-level INFO
+          echo "[$$(date)] Sincronizzazione completata"
+          sleep 300
+        done
+    restart: unless-stopped
+    networks:
+      - homeserver

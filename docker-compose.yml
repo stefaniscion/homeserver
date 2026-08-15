@@ -39,6 +39,10 @@ services:
     extends:
       file: services/syncthing.yml
       service: syncthing
+  rclone:
+    extends:
+      file: services/rclone.yml
+      service: rclone
 networks:
   homeserver:
     name: homeserver
