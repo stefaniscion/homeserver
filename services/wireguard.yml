@@ -11,7 +11,7 @@ services:
       - PGID=${PGID?err}
       - TZ=${TZ?err}
       - SERVERURL=wireguard.${HOMESERVER_URL?err}
-      - PEERS=1
+      - PEERS=pixel10,vega
     volumes:
       - ${CONFIG_PATH?err}/wireguard/config:/config
       - ${CONFIG_PATH?err}/wireguard/lib/modules:/lib/modules
